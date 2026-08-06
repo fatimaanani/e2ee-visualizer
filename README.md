@@ -24,7 +24,7 @@ Instead of displaying only the final ciphertext, the visualizer explains the com
 
 ### Message Input
 
-![Message input interface](screenshots/message-input.png)
+![Message input interface](C:\Users\user\OneDrive\Pictures\Screenshots\message-input.png)
 
 ### Encryption Flow
 
