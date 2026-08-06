@@ -20,20 +20,6 @@ Instead of displaying only the final ciphertext, the visualizer explains the com
 - Animated courier cat following the encrypted packet
 - Custom terminal-inspired interface
 
-## 📸 Preview
-
-### Message Input
-
-![Message input interface](C:\Users\user\OneDrive\Pictures\Screenshots\message-input.png)
-
-### Encryption Flow
-
-![Encryption flow visualization](screenshots/encryption-flow.png)
-
-### Successful Delivery
-
-![Successful encrypted message delivery](screenshots/successful-delivery.png)
-
 ## 🧠 How It Works
 
 1. The sender writes a readable plaintext message.
