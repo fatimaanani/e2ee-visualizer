@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E2EE Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="page_wrapper">
+        <div class="title_section">
+            <h1>E2EE- ⍤⃞</h1>
+            <p class="subtitle_text">> secure channel established · rsa <span class="tooltip_word syntax-purple">encryption<span class="tooltip_text">turns a readable message into unreadable form using a key</span></span> active - └[∵┌]</p>
+        </div>
+
+        <div class="intro_section">
+            <div class="intro_card">
+                <h2>How E2EE Protects Your Messages</h2>
+                <p>
+                    This simulation shows how a message moves through an end-to-end <span class="tooltip_word syntax-purple">encrypted<span class="tooltip_text">means the message was locked into unreadable form using a key</span></span> flow.
+                    The sender writes a readable message, the receiver’s <span class="tooltip_word syntax-blue">public key<span class="tooltip_text">a key anyone can use to lock a message for the receiver</span></span> <span class="tooltip_word syntax-purple">encrypts<span class="tooltip_text">turns a readable message into unreadable form using a key</span></span> it into <span class="tooltip_word syntax-green">ciphertext<span class="tooltip_text">the scrambled version of the message after encryption</span></span>,
+                    the server forwards it without reading it, the interceptor tries and fails to <span class="tooltip_word syntax-orange">decrypt<span class="tooltip_text">restores the original message from encrypted data using the correct key</span></span> it,
+                    and only the receiver can unlock it using the matching <span class="tooltip_word syntax-yellow">private key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span>.
+                </p>
+            </div>
+        </div>
+
+        <div class="input_section">
+            <div class="panel_box sender_panel">
+                <h2>Sender</h2>
+                <label for="message_input">Type a message (.❛ᴗ❛.)</label>
+                <textarea id="message_input" placeholder="Write a private message here..."></textarea>
+                <button id="send_button">Encrypt and Send</button>
+
+                <div class="result_block">
+                    <h3>Plaintext Message</h3>
+                    <p id="plaintext_output">Waiting for input...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="flow_section">
+            <h2 class="section_heading"><span class="tooltip_word syntax-purple">Encryption<span class="tooltip_text">turns a readable message into unreadable form using a key</span></span> Flow</h2>
+
+            <div class="flow_and_results_row">
+                <div class="flow_section_panel">
+                    <div class="flow_layout">
+                        <div class="flow_map_area">
+                            <div class="flow_map">
+                                <div class="flow_box" id="sender_flow_box">
+                                    <h3>Sender</h3>
+                                    <p>The readable message starts here.</p>
+                                </div>
+
+                                <div class="flow_arrow">→</div>
+
+                                <div class="flow_box" id="server_flow_box">
+                                    <h3>Relay Server</h3>
+                                    <p>The message passes through as <span class="tooltip_word syntax-green">ciphertext<span class="tooltip_text">the scrambled version of the message after encryption</span></span> only.</p>
+                                </div>
+
+                                <div class="flow_arrow">→</div>
+
+                                <div class="flow_box" id="receiver_flow_box">
+                                    <h3>Receiver</h3>
+                                    <p>The receiver uses the matching <span class="tooltip_word syntax-yellow">private key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span> to <span class="tooltip_word syntax-orange">decrypt<span class="tooltip_text">restores the original message from encrypted data using the correct key</span></span>.</p>
+                                </div>
+                            </div>
+
+                            <div class="interceptor_branch">
+                                <div class="branch_line">↓</div>
+                                <div class="flow_box interceptor_flow_box" id="interceptor_flow_box">
+                                    <h3>Interceptor</h3>
+                                    <p>Attempts <span class="tooltip_word syntax-orange">decryption<span class="tooltip_text">restores the original message from encrypted data using the correct key</span></span> with a different <span class="tooltip_word syntax-yellow">private key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span> and fails.</p>
+                                </div>
+                            </div>
+
+                            <div class="inline_cat_path">
+                                <div class="tiny_rainbow_trail" id="tiny_rainbow_trail"></div>
+                                <div class="tiny_cat_runner" id="cat_runner">₍^. .^₎⟆</div>
+                            </div>
+
+                            <p class="cat_status_text" id="cat_status_text">
+                                tiny courier is waiting quietly at the sender side ( =ω= )
+                            </p>
+                        </div>
+
+                        <div class="flow_bubble_panel">
+                            <div class="floating_step_bubble" id="floating_step_bubble">
+                                <div class="bubble_step_number" id="bubble_step_number">Step 0</div>
+                                <h3 id="bubble_step_title">Waiting to begin</h3>
+                                <p id="bubble_step_text">
+                                    Type a message and click the button to watch the <span class="tooltip_word syntax-purple">encryption<span class="tooltip_text">turns a readable message into unreadable form using a key</span></span> flow happen step by step.
+                                </p>
+                            </div>
+
+                            <div class="bubble_controls">
+                                <button id="pause_button" type="button">Pause Flow</button>
+                                <p id="pause_message" class="pause_message_text"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel_box live_results_panel">
+                    <h2>Live Results</h2>
+                    <p class="info_text">
+                        This section shows the actual <span class="tooltip_word syntax-purple">encrypted<span class="tooltip_text">means the message was locked into unreadable form using a key</span></span> output, the interceptor’s failed attempt, and the receiver’s successful <span class="tooltip_word syntax-orange">decryption<span class="tooltip_text">restores the original message from encrypted data using the correct key</span></span>.
+                    </p>
+
+                    <div class="result_block">
+                        <h3><span class="tooltip_word syntax-purple">Encrypted<span class="tooltip_text">means the message was locked into unreadable form using a key</span></span> Message</h3>
+                        <p id="ciphertext_output">No <span class="tooltip_word syntax-purple">encrypted<span class="tooltip_text">means the message was locked into unreadable form using a key</span></span> message yet.</p>
+                    </div>
+
+                    <div class="result_block">
+                        <h3>Interceptor Result</h3>
+                        <p id="attacker_result">No attempt yet.</p>
+                    </div>
+
+                    <div class="result_block receiver_unlock_block">
+                        <h3>Receiver <span class="tooltip_word syntax-orange">Decrypted<span class="tooltip_text">restores the original message from encrypted data using the correct key</span></span> Message</h3>
+
+                        <div class="receiver_lock_area">
+                            <button id="unlock_button" type="button">🔒</button>
+                            <p id="unlock_hint_text">The receiver can unlock this only after the <span class="tooltip_word syntax-purple">encryption<span class="tooltip_text">turns a readable message into unreadable form using a key</span></span> flow reaches the final step.</p>
+                        </div>
+
+                        <p id="decrypted_output">No <span class="tooltip_word syntax-orange">decrypted<span class="tooltip_text">means the original readable message was restored using the correct key</span></span> message yet.</p>
+
+                        <p id="celebration_text" class="celebration_text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="main_grid">
+            <div class="panel_box">
+                <h2>Key Logic</h2>
+                <p class="info_text">
+                    RSA uses two linked keys. The <span class="tooltip_word syntax-blue">public key<span class="tooltip_text">a key anyone can use to lock a message for the receiver</span></span> can <span class="tooltip_word syntax-purple">encrypt<span class="tooltip_text">turns a readable message into unreadable form using a key</span></span> a message, but only the matching <span class="tooltip_word syntax-yellow">private key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span> can <span class="tooltip_word syntax-orange">decrypt<span class="tooltip_text">restores the original message from encrypted data using the correct key</span></span> it.
+                </p>
+
+                <div class="result_block">
+                    <h3>Receiver <span class="tooltip_word syntax-blue">Public Key<span class="tooltip_text">a key anyone can use to lock a message for the receiver</span></span></h3>
+                    <p id="public_key_explanation">
+                        The sender uses the receiver’s <span class="tooltip_word syntax-blue">public key<span class="tooltip_text">a key anyone can use to lock a message for the receiver</span></span> to lock the message.
+                    </p>
+                </div>
+
+                <div class="result_block">
+                    <h3>Receiver <span class="tooltip_word syntax-yellow">Private Key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span></h3>
+                    <p id="private_key_explanation">
+                        The receiver owns the matching <span class="tooltip_word syntax-yellow">private key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span> that can correctly unlock the <span class="tooltip_word syntax-green">ciphertext<span class="tooltip_text">the scrambled version of the message after encryption</span></span>.
+                    </p>
+                </div>
+
+                <div class="result_block">
+                    <h3>Interceptor <span class="tooltip_word syntax-yellow">Private Key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span></h3>
+                    <p id="wrong_key_explanation">
+                        The interceptor has a different <span class="tooltip_word syntax-yellow">private key<span class="tooltip_text">a secret key that only the receiver has to unlock the message</span></span>, but it does not match the <span class="tooltip_word syntax-blue">public key<span class="tooltip_text">a key anyone can use to lock a message for the receiver</span></span> used during <span class="tooltip_word syntax-purple">encryption<span class="tooltip_text">turns a readable message into unreadable form using a key</span></span>.
+                    </p>
+                </div>
+            </div>
+
+            <div class="panel_box">
+                <h2>Server View</h2>
+                <p class="info_text">
+                    The relay server can forward the <span class="tooltip_word syntax-purple">encrypted<span class="tooltip_text">means the message was locked into unreadable form using a key</span></span> packet and observe <span class="tooltip_word syntax-cyan">metadata<span class="tooltip_text">info about the message like sender, time, or size but not the actual content</span></span>, but it cannot read the original plaintext.
+                </p>
+
+                <div class="result_block">
+                    <h3>From</h3>
+                    <p id="server_sender">-</p>
+                </div>
+
+                <div class="result_block">
+                    <h3>To</h3>
+                    <p id="server_receiver">-</p>
+                </div>
+
+                <div class="result_block">
+                    <h3>Timestamp</h3>
+                    <p id="server_timestamp">-</p>
+                </div>
+
+                <div class="result_block">
+                    <h3>Message Length</h3>
+                    <p id="server_length">-</p>
+                </div>
+
+                <div class="result_block">
+                    <h3><span class="tooltip_word syntax-green">Ciphertext<span class="tooltip_text">the scrambled version of the message after encryption</span></span> Seen by Server</h3>
+                    <p id="server_ciphertext">No <span class="tooltip_word syntax-green">ciphertext<span class="tooltip_text">the scrambled version of the message after encryption</span></span> yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
